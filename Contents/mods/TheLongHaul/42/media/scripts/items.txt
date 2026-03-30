@@ -1,11 +1,14 @@
 // The Long Haul - Item Definitions
 // Build 42.15+
 //
-// NOTE: Items marked TODO:VERIFY need their vanilla item IDs or property values
-// confirmed against the actual game files before publishing.
+// Icons: generated placeholder PNGs in 42/media/textures/
+//   Replace with final pixel art when ready; run scripts/generate_icons.py to regenerate placeholders.
 //
-// Icon references are placeholders using existing vanilla icons.
-// Replace with custom icons once art is available.
+// Models: vanilla placeholders referenced by model script name.
+//   TODO:VERIFY these model names exist in B42 by checking vanilla scripts.
+//   TODO: Replace with custom FBX models once created in Blender.
+//   Items with no usable vanilla analogue have model properties omitted —
+//   they'll be invisible in-hand until custom models are made.
 
 module LongHaul
 {
@@ -26,7 +29,7 @@ module LongHaul
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 2.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = StickTravois,
         Capacity            = 20,
         WeightReduction     = 50,
         RunSpeedModifier    = 0.35,
@@ -34,7 +37,13 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        // Vanilla placeholder: Sledgehammer is a long two-handed item, closest shape
+        // TODO:VERIFY model name; replace with custom model
+        StaticModel             = Sledgehammer,
+        WorldStaticModel        = Sledgehammer,
+        ReplaceInPrimaryHand    = Sledgehammer holding2handedWeapon,
+        ReplaceInSecondHand     = Sledgehammer holding2handedWeaponLeft,
+        Tags                    = base:holdgeneral,
     }
 
     // Tier 2 — canvas platform lashed between the poles. More stable load.
@@ -44,7 +53,7 @@ module LongHaul
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 2.5,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = LashedTravois,
         Capacity            = 35,
         WeightReduction     = 60,
         RunSpeedModifier    = 0.40,
@@ -52,7 +61,11 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        StaticModel             = Sledgehammer,
+        WorldStaticModel        = Sledgehammer,
+        ReplaceInPrimaryHand    = Sledgehammer holding2handedWeapon,
+        ReplaceInSecondHand     = Sledgehammer holding2handedWeaponLeft,
+        Tags                    = base:holdgeneral,
     }
 
     // Tier 3 — plank platform on flat runners. End of the drag line.
@@ -63,7 +76,7 @@ module LongHaul
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 5.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = DragSledge,
         Capacity            = 50,
         WeightReduction     = 65,
         RunSpeedModifier    = 0.45,
@@ -71,7 +84,9 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        // No good vanilla analogue for a flat sled — omit until custom model exists
+        // TODO: custom model
+        Tags                    = base:holdgeneral,
     }
 
     // =========================================================================
@@ -87,7 +102,7 @@ module LongHaul
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 1.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = ShoulderYoke,
         Capacity            = 20,
         WeightReduction     = 40,
         RunSpeedModifier    = 0.85,
@@ -95,7 +110,13 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        // Vanilla placeholder: Plank is a horizontal held item, passable shape
+        // TODO:VERIFY model name; replace with custom model
+        StaticModel             = Plank,
+        WorldStaticModel        = Plank,
+        ReplaceInPrimaryHand    = Plank holding2handedWeapon,
+        ReplaceInSecondHand     = Plank holding2handedWeaponLeft,
+        Tags                    = base:holdgeneral,
     }
 
     // Tier 2 — padded with rags/leather for longer carries without fatigue.
@@ -105,7 +126,7 @@ module LongHaul
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 1.2,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = PaddedYoke,
         Capacity            = 30,
         WeightReduction     = 50,
         RunSpeedModifier    = 0.90,
@@ -113,7 +134,11 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        StaticModel             = Plank,
+        WorldStaticModel        = Plank,
+        ReplaceInPrimaryHand    = Plank holding2handedWeapon,
+        ReplaceInSecondHand     = Plank holding2handedWeaponLeft,
+        Tags                    = base:holdgeneral,
     }
 
     // =========================================================================
@@ -133,18 +158,19 @@ module LongHaul
         DisplayCategory     = Material,
         ItemType            = base:normal,
         Weight              = 3.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = CarvedWoodWheel,
+        // No good vanilla analogue — omit model until custom art exists
     }
 
     // Spoked wheel built around a carved hub. Lighter and faster than the solid wheel.
-    // Requires both Carving (for components) and Carpentry (for assembly).
     item AssembledWoodWheel
     {
         DisplayName         = Assembled Wooden Wheel,
         DisplayCategory     = Material,
         ItemType            = base:normal,
         Weight              = 2.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = AssembledWoodWheel,
+        // No good vanilla analogue — omit model until custom art exists
     }
 
     // =========================================================================
@@ -155,14 +181,13 @@ module LongHaul
 
     // Tier 1 — stone wheel from masonry mounted on a sled frame.
     // Heavy, slow, very durable. The "tank" option.
-    // Requires Carpentry 3 + Masonry 3. Consumes a Drag Sledge.
     item StoneWheelbarrow
     {
         DisplayName         = Stone Wheelbarrow,
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 8.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = StoneWheelbarrow,
         Capacity            = 65,
         WeightReduction     = 72,
         RunSpeedModifier    = 0.50,
@@ -170,19 +195,18 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        // TODO: custom model — no vanilla wheelbarrow model confirmed in B42 vanilla
+        Tags                    = base:holdgeneral,
     }
 
-    // Tier 2 — metal axle and frame reinforcement on the stone wheelbarrow.
-    // Highest capacity and durability of any wheelbarrow. Still slow.
-    // Requires Masonry 3 + Metalwork 2. Consumes a Stone Wheelbarrow.
+    // Tier 2 — metal axle and frame reinforcement. Highest capacity.
     item MetalAxledStoneWheelbarrow
     {
         DisplayName         = Metal-Axled Stone Wheelbarrow,
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 9.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = MetalAxledStoneWheelbarrow,
         Capacity            = 90,
         WeightReduction     = 85,
         RunSpeedModifier    = 0.55,
@@ -190,7 +214,7 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        Tags                    = base:holdgeneral,
     }
 
     // =========================================================================
@@ -199,16 +223,14 @@ module LongHaul
     // Both tiers branch from the Drag Sledge independently of the stone line.
     // =========================================================================
 
-    // Tier 1 — wooden wheel mounted on a sled frame. Lighter and faster than stone.
-    // Requires Carpentry 4. Consumes a Drag Sledge.
-    // Two recipe paths: via CarvedWoodWheel (Carving 4) or AssembledWoodWheel (Carp 4 + Carving).
+    // Tier 1 — wooden wheel on a sled frame. Lighter and faster than stone.
     item WoodenWheelbarrow
     {
         DisplayName         = Wooden Wheelbarrow,
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 5.0,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = WoodenWheelbarrow,
         Capacity            = 70,
         WeightReduction     = 75,
         RunSpeedModifier    = 0.65,
@@ -216,18 +238,17 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        Tags                    = base:holdgeneral,
     }
 
-    // Tier 2 — metal-reinforced frame and axle. Best speed of any wheelbarrow.
-    // Requires Carpentry 4 + Metalwork 2. Consumes a Wooden Wheelbarrow.
+    // Tier 2 — metal-reinforced frame and axle. Best speed.
     item ReinforcedWheelbarrow
     {
         DisplayName         = Reinforced Wheelbarrow,
         DisplayCategory     = Container,
         ItemType            = base:container,
         Weight              = 5.5,
-        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Icon                = ReinforcedWheelbarrow,
         Capacity            = 80,
         WeightReduction     = 80,
         RunSpeedModifier    = 0.70,
@@ -235,6 +256,6 @@ module LongHaul
         CloseSound          = CloseSack,
         OpenSound           = OpenSack,
         PutInSound          = StoreItemSack,
-        Tags                = base:holdgeneral,
+        Tags                    = base:holdgeneral,
     }
 }
