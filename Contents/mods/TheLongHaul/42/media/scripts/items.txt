@@ -1,0 +1,219 @@
+// The Long Haul - Item Definitions
+// Build 42.15+
+//
+// NOTE: Items marked TODO:VERIFY need their vanilla item IDs or property values
+// confirmed against the actual game files before publishing.
+//
+// Icon references are placeholders using existing vanilla icons.
+// Replace with custom icons once art is available.
+
+module LongHaul
+{
+    imports
+    {
+        Base
+    }
+
+    // =========================================================================
+    // TRAVOIS LINE
+    // Two-handed drag items. High speed penalty, no combat while held.
+    // =========================================================================
+
+    // Tier 1 — just branches lashed together. Day-one craft.
+    item StickTravois
+    {
+        DisplayName         = Stick Travois,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 2.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 20,
+        WeightReduction     = 50,
+        RunSpeedModifier    = 0.35,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // Tier 2 — canvas platform lashed between the poles. More stable load.
+    item LashedTravois
+    {
+        DisplayName         = Lashed Travois,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 2.5,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 35,
+        WeightReduction     = 60,
+        RunSpeedModifier    = 0.40,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // Tier 3 — plank platform on flat runners. End of the drag line.
+    // Consumed as a base when crafting the Stone Wheelbarrow.
+    item DragSledge
+    {
+        DisplayName         = Drag Sledge,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 5.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 50,
+        WeightReduction     = 65,
+        RunSpeedModifier    = 0.45,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // =========================================================================
+    // SHOULDER YOKE LINE
+    // Balanced across both shoulders. Lower speed penalty than drag items.
+    // Good for water/bucket hauling. Both hands occupied but less noise.
+    // =========================================================================
+
+    // Tier 1 — carved branch, notched at each end for hanging loads.
+    item ShoulderYoke
+    {
+        DisplayName         = Shoulder Yoke,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 1.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 20,
+        WeightReduction     = 40,
+        RunSpeedModifier    = 0.85,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // Tier 2 — padded with rags/leather for longer carries without fatigue.
+    item PaddedYoke
+    {
+        DisplayName         = Padded Shoulder Yoke,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 1.2,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 30,
+        WeightReduction     = 50,
+        RunSpeedModifier    = 0.90,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // =========================================================================
+    // WHEEL COMPONENTS
+    // Crafting sub-components used in wheelbarrow recipes.
+    // Not containers — purely materials.
+    // =========================================================================
+
+    // Carved from a branch using a knife. Used as spokes in the assembled wheel.
+    item WoodenRod
+    {
+        DisplayName         = Wooden Rod,
+        DisplayCategory     = Material,
+        ItemType            = base:normal,
+        Weight              = 0.3,
+        Icon                = WoodenStick,      // TODO: verify icon name
+    }
+
+    // Solid disc carved from a log. Heavier, functional as a standalone wheel.
+    // Can be used directly in a wheelbarrow OR as the hub for an assembled wheel.
+    item CarvedWoodWheel
+    {
+        DisplayName         = Carved Wooden Wheel,
+        DisplayCategory     = Material,
+        ItemType            = base:normal,
+        Weight              = 3.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+    }
+
+    // Spoked wheel built around a carved hub. Lighter and faster than the solid wheel.
+    // Requires both Carving (for components) and Carpentry (for assembly).
+    item AssembledWoodWheel
+    {
+        DisplayName         = Assembled Wooden Wheel,
+        DisplayCategory     = Material,
+        ItemType            = base:normal,
+        Weight              = 2.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+    }
+
+    // =========================================================================
+    // WHEELBARROW LINE
+    // Each tier consumes the previous as a base component.
+    // DragSledge → StoneWheelbarrow → WoodenWheelbarrow → ReinforcedWheelbarrow
+    // =========================================================================
+
+    // Tier 1 — stone wheel from masonry. Heavy, slow, very durable.
+    // Requires Carpentry 3 + Masonry 3. Consumes a Drag Sledge as the frame base.
+    item StoneWheelbarrow
+    {
+        DisplayName         = Stone Wheelbarrow,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 8.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 60,
+        WeightReduction     = 70,
+        RunSpeedModifier    = 0.50,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // Tier 2 — carved or assembled wooden wheel. Lighter, faster.
+    // Requires Carpentry 4. Consumes a Stone Wheelbarrow as the base.
+    item WoodenWheelbarrow
+    {
+        DisplayName         = Wooden Wheelbarrow,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 5.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 70,
+        WeightReduction     = 75,
+        RunSpeedModifier    = 0.65,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // Tier 3 — metal-reinforced frame and axle. Best capacity and speed.
+    // Requires Carpentry 4 + Metalwork 2. Consumes a Wooden Wheelbarrow as the base.
+    item ReinforcedWheelbarrow
+    {
+        DisplayName         = Reinforced Wheelbarrow,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 5.5,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 80,
+        WeightReduction     = 80,
+        RunSpeedModifier    = 0.70,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+}

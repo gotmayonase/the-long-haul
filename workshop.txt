@@ -1,0 +1,6 @@
+version=1
+workshopid=0
+title=The Long Haul
+description=Adds tiered primitive hauling tools for wilderness survival. Progress from a stick travois through a drag sledge to a reinforced wheelbarrow. Shoulder yoke line available for lighter loads. All items require both hands and slow movement — survival has a cost.
+visibility=public
+tags=Build 42;Items;Recipes;Survival

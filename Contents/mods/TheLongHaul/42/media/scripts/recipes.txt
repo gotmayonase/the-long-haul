@@ -1,0 +1,350 @@
+// The Long Haul - Recipe Definitions
+// Build 42.15+
+//
+// Skill names to verify against game files:
+//   Carpentry  → Woodwork
+//   Metalwork  → Metalwork  (verify)
+//   Masonry    → Masonry    (verify)
+//   Carving    → Carving    (verify)
+//   Tailoring  → Tailoring  (verify)
+//
+// Vanilla item IDs marked TODO:VERIFY where uncertain.
+// Reference the Hydrocraft Wheelbarrow mod scripts as a cross-check.
+
+module LongHaul
+{
+    imports
+    {
+        Base
+    }
+
+    // =========================================================================
+    // SHOULDER YOKE LINE
+    // =========================================================================
+
+    // A notched branch balanced across the shoulders for hanging loads.
+    craftRecipe CraftShoulderYoke
+    {
+        timedAction     = Making,
+        Time            = 80,
+        category        = Carpentry,
+        xpAward         = Woodwork:15,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [Base.TreeBranch],                       // TODO:VERIFY item ID
+            item 2 [Base.Twine],                            // TODO:VERIFY item ID
+            item 1 tags[base:saw] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.ShoulderYoke,
+        }
+    }
+
+    // Rags padded along the shoulder contact point. Easier on the body.
+    craftRecipe CraftPaddedYoke
+    {
+        timedAction     = Making,
+        Time            = 120,
+        category        = Tailoring,
+        SkillRequired   = Tailoring:2,
+        xpAward         = Tailoring:20,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.ShoulderYoke],
+            item 3 [Base.Rag],
+            item 1 [Base.Twine],                            // TODO:VERIFY item ID
+            item 1 tags[base:needle] mode:keep,             // TODO:VERIFY tag name
+        }
+
+        outputs
+        {
+            item 1 LongHaul.PaddedYoke,
+        }
+    }
+
+    // =========================================================================
+    // TRAVOIS LINE
+    // =========================================================================
+
+    // Two long branches lashed into a V-shape. Anything goes on the crosspiece.
+    craftRecipe CraftStickTravois
+    {
+        timedAction     = Making,
+        Time            = 100,
+        category        = Carpentry,
+        xpAward         = Woodwork:20,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 3 [Base.TreeBranch],                       // TODO:VERIFY item ID
+            item 3 [Base.Twine],                            // TODO:VERIFY item ID
+        }
+
+        outputs
+        {
+            item 1 LongHaul.StickTravois,
+        }
+    }
+
+    // Canvas or sheet lashed between the poles as a proper cargo platform.
+    craftRecipe CraftLashedTravois
+    {
+        timedAction     = Making,
+        Time            = 150,
+        category        = Tailoring,
+        SkillRequired   = Tailoring:1,
+        xpAward         = Woodwork:15;Tailoring:25,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.StickTravois],
+            item 1 [Base.Sheet],                            // TODO:VERIFY item ID (Base.Sheet or Base.Sheets?)
+            item 2 [Base.Twine],                            // TODO:VERIFY item ID
+            item 1 tags[base:needle] mode:keep,             // TODO:VERIFY tag name
+        }
+
+        outputs
+        {
+            item 1 LongHaul.LashedTravois,
+        }
+    }
+
+    // Plank platform on flat wooden runners. End of the drag line.
+    // Metal strips on the runner bottoms reduce friction and snagging.
+    // This is also the required base component for the Stone Wheelbarrow.
+    craftRecipe CraftDragSledge
+    {
+        timedAction     = Making,
+        Time            = 400,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:3;Metalwork:1,
+        xpAward         = Woodwork:60;Metalwork:20,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 4 [Base.Plank],
+            item 8 [Base.Nails],
+            item 2 [Base.ScrapMetal],
+            item 1 tags[base:hammer] mode:keep,
+            item 1 tags[base:saw] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.DragSledge,
+        }
+    }
+
+    // =========================================================================
+    // WHEEL COMPONENTS
+    // Sub-components for the wheelbarrow line.
+    // =========================================================================
+
+    // Thin rods carved from branches — used as spokes in an assembled wheel.
+    // Low carving skill, yields two rods per branch.
+    craftRecipe CraftWoodenRod
+    {
+        timedAction     = Making,
+        Time            = 60,
+        category        = Carpentry,
+        SkillRequired   = Carving:1,
+        xpAward         = Carving:15,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [Base.TreeBranch],                       // TODO:VERIFY item ID
+            item 1 tags[base:knifesharp] mode:keep,         // TODO:VERIFY tag name
+        }
+
+        outputs
+        {
+            item 2 LongHaul.WoodenRod,
+        }
+    }
+
+    // A solid disc wheel carved from a log. Heavy but functional standalone.
+    // Can be used directly in a wheelbarrow OR as the hub for an assembled wheel.
+    craftRecipe CraftCarvedWoodWheel
+    {
+        timedAction     = Making,
+        Time            = 600,
+        category        = Carpentry,
+        SkillRequired   = Carving:4,
+        xpAward         = Carving:80,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [Base.Log],                              // TODO:VERIFY item ID
+            item 1 tags[base:knifesharp] mode:keep,         // TODO:VERIFY tag name
+            item 1 tags[base:saw] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.CarvedWoodWheel,
+        }
+    }
+
+    // A spoked wheel built around a carved hub. Lighter and faster.
+    // Requires the solid carved wheel as the hub plus rods for spokes.
+    // The dual Carving+Carpentry gate is intentional — both skills required.
+    craftRecipe CraftAssembledWoodWheel
+    {
+        timedAction     = Making,
+        Time            = 500,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:4,
+        xpAward         = Woodwork:70;Carving:40,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.CarvedWoodWheel],
+            item 6 [LongHaul.WoodenRod],
+            item 2 [Base.Plank],
+            item 4 [Base.Nails],
+            item 1 tags[base:hammer] mode:keep,
+            item 1 tags[base:saw] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.AssembledWoodWheel,
+        }
+    }
+
+    // =========================================================================
+    // WHEELBARROW LINE
+    // Each recipe consumes the previous tier as its base.
+    // DragSledge → StoneWheelbarrow → WoodenWheelbarrow → ReinforcedWheelbarrow
+    // =========================================================================
+
+    // Stone wheel mounted on a sled frame. Heavy, slow, but very durable.
+    // Uses the existing in-game StoneWheel (crafted via Masonry skill).
+    // TODO:VERIFY Base.StoneWheel is the correct item ID for the masonry stone wheel.
+    craftRecipe CraftStoneWheelbarrow
+    {
+        timedAction     = Making,
+        Time            = 600,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:3;Masonry:3,
+        xpAward         = Woodwork:70;Masonry:50,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.DragSledge],
+            item 1 [Base.StoneWheel],                       // TODO:VERIFY item ID
+            item 2 [Base.Plank],
+            item 6 [Base.Nails],
+            item 1 tags[base:hammer] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.StoneWheelbarrow,
+        }
+    }
+
+    // Upgrade: swap the stone wheel for a solid carved wooden wheel.
+    // Lighter and faster. Consumes the stone wheelbarrow as the base.
+    craftRecipe UpgradeWheelbarrow_CarvedWheel
+    {
+        timedAction     = Making,
+        Time            = 450,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:4,
+        xpAward         = Woodwork:60;Carving:30,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.StoneWheelbarrow],
+            item 1 [LongHaul.CarvedWoodWheel],
+            item 2 [Base.Plank],
+            item 4 [Base.Nails],
+            item 1 tags[base:hammer] mode:keep,
+            item 1 tags[base:saw] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.WoodenWheelbarrow,
+        }
+    }
+
+    // Upgrade: swap the stone wheel for a spoked assembled wheel.
+    // Faster than the carved wheel path. Slightly less crafting time.
+    craftRecipe UpgradeWheelbarrow_AssembledWheel
+    {
+        timedAction     = Making,
+        Time            = 380,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:4,
+        xpAward         = Woodwork:60;Carving:20,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.StoneWheelbarrow],
+            item 1 [LongHaul.AssembledWoodWheel],
+            item 2 [Base.Plank],
+            item 4 [Base.Nails],
+            item 1 tags[base:hammer] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.WoodenWheelbarrow,
+        }
+    }
+
+    // Final upgrade: metal-reinforced axle and frame.
+    // Best capacity and speed. Requires the wooden wheelbarrow as the base.
+    craftRecipe UpgradeWheelbarrow_Reinforced
+    {
+        timedAction     = Making,
+        Time            = 600,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:4;Metalwork:2,
+        xpAward         = Woodwork:60;Metalwork:60,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.WoodenWheelbarrow],
+            item 3 [Base.MetalPipe],                        // TODO:VERIFY item ID
+            item 2 [Base.ScrapMetal],
+            item 8 [Base.Nails],
+            item 1 tags[base:hammer] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.ReinforcedWheelbarrow,
+        }
+    }
+}
