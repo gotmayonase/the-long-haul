@@ -111,3 +111,9 @@ Enable **The Long Haul** in the mod list, start a new save, and check the Carpen
 ## Requirements
 
 - Project Zomboid Build **42.15+** (unstable branch)
+
+---
+
+## Modding Guide
+
+Building this mod came with a lot of hard-won knowledge about B42 modding that's poorly documented elsewhere. That's captured in [`docs/modding-guide.md`](docs/modding-guide.md) — a practical guide covering mod structure, item scripting, the new `craftRecipe` system, Lua hooks, container mechanics, and common gotchas. Updated as development continues.
