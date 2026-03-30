@@ -123,7 +123,7 @@ module LongHaul
 
     // Plank platform on flat wooden runners. End of the drag line.
     // Metal strips on the runner bottoms reduce friction and snagging.
-    // This is also the required base component for the Stone Wheelbarrow.
+    // Required base component for both wheelbarrow lines.
     craftRecipe CraftDragSledge
     {
         timedAction     = Making,
@@ -151,32 +151,11 @@ module LongHaul
 
     // =========================================================================
     // WHEEL COMPONENTS
-    // Sub-components for the wheelbarrow line.
+    // Sub-components for the wooden wheelbarrow line.
     // =========================================================================
 
-    // Thin rods carved from branches — used as spokes in an assembled wheel.
-    // Low carving skill, yields two rods per branch.
-    craftRecipe CraftWoodenRod
-    {
-        timedAction     = Making,
-        Time            = 60,
-        category        = Carpentry,
-        SkillRequired   = Carving:1,
-        xpAward         = Carving:15,
-        Tags            = InHandCraft,
-        needToBeLearn   = false,
-
-        inputs
-        {
-            item 1 [Base.TreeBranch],                       // TODO:VERIFY item ID
-            item 1 tags[base:knifesharp] mode:keep,         // TODO:VERIFY tag name
-        }
-
-        outputs
-        {
-            item 2 LongHaul.WoodenRod,
-        }
-    }
+    // NOTE: Wooden Rods are crafted via vanilla Carving — no recipe needed here.
+    // Use Base.WoodenRod (TODO:VERIFY exact ID) as the spoke input below.
 
     // A solid disc wheel carved from a log. Heavy but functional standalone.
     // Can be used directly in a wheelbarrow OR as the hub for an assembled wheel.
@@ -219,7 +198,7 @@ module LongHaul
         inputs
         {
             item 1 [LongHaul.CarvedWoodWheel],
-            item 6 [LongHaul.WoodenRod],
+            item 6 [Base.WoodenRod],                        // TODO:VERIFY vanilla item ID
             item 2 [Base.Plank],
             item 4 [Base.Nails],
             item 1 tags[base:hammer] mode:keep,
@@ -233,13 +212,12 @@ module LongHaul
     }
 
     // =========================================================================
-    // WHEELBARROW LINE
-    // Each recipe consumes the previous tier as its base.
-    // DragSledge → StoneWheelbarrow → WoodenWheelbarrow → ReinforcedWheelbarrow
+    // STONE WHEELBARROW LINE
+    // Masonry path. Branches from Drag Sledge independently of the wooden line.
+    // Identity: highest capacity and durability, lower speed.
     // =========================================================================
 
-    // Stone wheel mounted on a sled frame. Heavy, slow, but very durable.
-    // Uses the existing in-game StoneWheel (crafted via Masonry skill).
+    // Stone wheel mounted on a sled frame. Heavy, slow, very durable.
     // TODO:VERIFY Base.StoneWheel is the correct item ID for the masonry stone wheel.
     craftRecipe CraftStoneWheelbarrow
     {
@@ -266,24 +244,58 @@ module LongHaul
         }
     }
 
-    // Upgrade: swap the stone wheel for a solid carved wooden wheel.
-    // Lighter and faster. Consumes the stone wheelbarrow as the base.
-    craftRecipe UpgradeWheelbarrow_CarvedWheel
+    // Metal axle and frame reinforcement on the stone wheelbarrow.
+    // Highest capacity of any wheelbarrow. Still slow — the stone wheel doesn't change.
+    craftRecipe UpgradeStoneWheelbarrow_MetalAxle
     {
         timedAction     = Making,
-        Time            = 450,
+        Time            = 600,
         category        = Carpentry,
-        SkillRequired   = Woodwork:4,
-        xpAward         = Woodwork:60;Carving:30,
+        SkillRequired   = Masonry:3;Metalwork:2,
+        xpAward         = Metalwork:80;Masonry:30,
         Tags            = InHandCraft,
         needToBeLearn   = false,
 
         inputs
         {
             item 1 [LongHaul.StoneWheelbarrow],
+            item 3 [Base.MetalPipe],                        // TODO:VERIFY item ID
+            item 2 [Base.ScrapMetal],
+            item 8 [Base.Nails],
+            item 1 tags[base:hammer] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 LongHaul.MetalAxledStoneWheelbarrow,
+        }
+    }
+
+    // =========================================================================
+    // WOODEN WHEELBARROW LINE
+    // Carpentry/Carving path. Branches from Drag Sledge independently of stone line.
+    // Identity: best speed, good capacity.
+    // Two recipe paths to the Wooden Wheelbarrow based on which wheel you craft.
+    // =========================================================================
+
+    // Path A: Carved solid wheel — Carving 4 only, no extra Carpentry needed.
+    // Heavier wheel, slightly more crafting time.
+    craftRecipe CraftWoodenWheelbarrow_CarvedWheel
+    {
+        timedAction     = Making,
+        Time            = 500,
+        category        = Carpentry,
+        SkillRequired   = Woodwork:4,
+        xpAward         = Woodwork:70;Carving:40,
+        Tags            = InHandCraft,
+        needToBeLearn   = false,
+
+        inputs
+        {
+            item 1 [LongHaul.DragSledge],
             item 1 [LongHaul.CarvedWoodWheel],
             item 2 [Base.Plank],
-            item 4 [Base.Nails],
+            item 6 [Base.Nails],
             item 1 tags[base:hammer] mode:keep,
             item 1 tags[base:saw] mode:keep,
         }
@@ -294,24 +306,24 @@ module LongHaul
         }
     }
 
-    // Upgrade: swap the stone wheel for a spoked assembled wheel.
-    // Faster than the carved wheel path. Slightly less crafting time.
-    craftRecipe UpgradeWheelbarrow_AssembledWheel
+    // Path B: Assembled spoked wheel — requires CarvedWoodWheel + WoodenRods.
+    // Lighter wheel, faster result, but more component prep work.
+    craftRecipe CraftWoodenWheelbarrow_AssembledWheel
     {
         timedAction     = Making,
-        Time            = 380,
+        Time            = 420,
         category        = Carpentry,
         SkillRequired   = Woodwork:4,
-        xpAward         = Woodwork:60;Carving:20,
+        xpAward         = Woodwork:70;Carving:25,
         Tags            = InHandCraft,
         needToBeLearn   = false,
 
         inputs
         {
-            item 1 [LongHaul.StoneWheelbarrow],
+            item 1 [LongHaul.DragSledge],
             item 1 [LongHaul.AssembledWoodWheel],
             item 2 [Base.Plank],
-            item 4 [Base.Nails],
+            item 6 [Base.Nails],
             item 1 tags[base:hammer] mode:keep,
         }
 
@@ -321,9 +333,8 @@ module LongHaul
         }
     }
 
-    // Final upgrade: metal-reinforced axle and frame.
-    // Best capacity and speed. Requires the wooden wheelbarrow as the base.
-    craftRecipe UpgradeWheelbarrow_Reinforced
+    // Metal-reinforced axle and frame. Best speed of any wheelbarrow.
+    craftRecipe UpgradeWoodenWheelbarrow_Reinforced
     {
         timedAction     = Making,
         Time            = 600,

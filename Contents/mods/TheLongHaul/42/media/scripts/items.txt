@@ -56,7 +56,7 @@ module LongHaul
     }
 
     // Tier 3 — plank platform on flat runners. End of the drag line.
-    // Consumed as a base when crafting the Stone Wheelbarrow.
+    // Consumed as a base when crafting either wheelbarrow line.
     item DragSledge
     {
         DisplayName         = Drag Sledge,
@@ -122,15 +122,8 @@ module LongHaul
     // Not containers — purely materials.
     // =========================================================================
 
-    // Carved from a branch using a knife. Used as spokes in the assembled wheel.
-    item WoodenRod
-    {
-        DisplayName         = Wooden Rod,
-        DisplayCategory     = Material,
-        ItemType            = base:normal,
-        Weight              = 0.3,
-        Icon                = WoodenStick,      // TODO: verify icon name
-    }
+    // NOTE: Wooden Rod already exists as a vanilla craftable item via Carving.
+    // Use Base.WoodenRod (TODO:VERIFY exact ID) in recipes — do not redefine it here.
 
     // Solid disc carved from a log. Heavier, functional as a standalone wheel.
     // Can be used directly in a wheelbarrow OR as the hub for an assembled wheel.
@@ -155,13 +148,14 @@ module LongHaul
     }
 
     // =========================================================================
-    // WHEELBARROW LINE
-    // Each tier consumes the previous as a base component.
-    // DragSledge → StoneWheelbarrow → WoodenWheelbarrow → ReinforcedWheelbarrow
+    // STONE WHEELBARROW LINE
+    // Masonry path. High capacity and durability, lower speed.
+    // Both tiers branch from the Drag Sledge independently of the wooden line.
     // =========================================================================
 
-    // Tier 1 — stone wheel from masonry. Heavy, slow, very durable.
-    // Requires Carpentry 3 + Masonry 3. Consumes a Drag Sledge as the frame base.
+    // Tier 1 — stone wheel from masonry mounted on a sled frame.
+    // Heavy, slow, very durable. The "tank" option.
+    // Requires Carpentry 3 + Masonry 3. Consumes a Drag Sledge.
     item StoneWheelbarrow
     {
         DisplayName         = Stone Wheelbarrow,
@@ -169,8 +163,8 @@ module LongHaul
         ItemType            = base:container,
         Weight              = 8.0,
         Icon                = WoodenPlank,      // TODO: replace with custom icon
-        Capacity            = 60,
-        WeightReduction     = 70,
+        Capacity            = 65,
+        WeightReduction     = 72,
         RunSpeedModifier    = 0.50,
         TwoHandWeapon       = TRUE,
         CloseSound          = CloseSack,
@@ -179,8 +173,35 @@ module LongHaul
         Tags                = base:holdgeneral,
     }
 
-    // Tier 2 — carved or assembled wooden wheel. Lighter, faster.
-    // Requires Carpentry 4. Consumes a Stone Wheelbarrow as the base.
+    // Tier 2 — metal axle and frame reinforcement on the stone wheelbarrow.
+    // Highest capacity and durability of any wheelbarrow. Still slow.
+    // Requires Masonry 3 + Metalwork 2. Consumes a Stone Wheelbarrow.
+    item MetalAxledStoneWheelbarrow
+    {
+        DisplayName         = Metal-Axled Stone Wheelbarrow,
+        DisplayCategory     = Container,
+        ItemType            = base:container,
+        Weight              = 9.0,
+        Icon                = WoodenPlank,      // TODO: replace with custom icon
+        Capacity            = 90,
+        WeightReduction     = 85,
+        RunSpeedModifier    = 0.55,
+        TwoHandWeapon       = TRUE,
+        CloseSound          = CloseSack,
+        OpenSound           = OpenSack,
+        PutInSound          = StoreItemSack,
+        Tags                = base:holdgeneral,
+    }
+
+    // =========================================================================
+    // WOODEN WHEELBARROW LINE
+    // Carpentry/Carving path. Better speed, good capacity.
+    // Both tiers branch from the Drag Sledge independently of the stone line.
+    // =========================================================================
+
+    // Tier 1 — wooden wheel mounted on a sled frame. Lighter and faster than stone.
+    // Requires Carpentry 4. Consumes a Drag Sledge.
+    // Two recipe paths: via CarvedWoodWheel (Carving 4) or AssembledWoodWheel (Carp 4 + Carving).
     item WoodenWheelbarrow
     {
         DisplayName         = Wooden Wheelbarrow,
@@ -198,8 +219,8 @@ module LongHaul
         Tags                = base:holdgeneral,
     }
 
-    // Tier 3 — metal-reinforced frame and axle. Best capacity and speed.
-    // Requires Carpentry 4 + Metalwork 2. Consumes a Wooden Wheelbarrow as the base.
+    // Tier 2 — metal-reinforced frame and axle. Best speed of any wheelbarrow.
+    // Requires Carpentry 4 + Metalwork 2. Consumes a Wooden Wheelbarrow.
     item ReinforcedWheelbarrow
     {
         DisplayName         = Reinforced Wheelbarrow,

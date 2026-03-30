@@ -15,9 +15,10 @@ LongHaul.HAUL_ITEMS = {
     ["LongHaul.DragSledge"]           = true,
     ["LongHaul.ShoulderYoke"]         = true,
     ["LongHaul.PaddedYoke"]           = true,
-    ["LongHaul.StoneWheelbarrow"]     = true,
-    ["LongHaul.WoodenWheelbarrow"]    = true,
-    ["LongHaul.ReinforcedWheelbarrow"] = true,
+    ["LongHaul.StoneWheelbarrow"]              = true,
+    ["LongHaul.MetalAxledStoneWheelbarrow"]    = true,
+    ["LongHaul.WoodenWheelbarrow"]             = true,
+    ["LongHaul.ReinforcedWheelbarrow"]         = true,
 }
 
 -- Returns the equipped haul item, or nil if the player isn't holding one.
